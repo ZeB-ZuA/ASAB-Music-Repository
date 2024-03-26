@@ -27,7 +27,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".PracticarTamborActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".GuardarLetraActivity"
+        <activity android:name=".controller.GuardarLetraActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ListarCancionesActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
