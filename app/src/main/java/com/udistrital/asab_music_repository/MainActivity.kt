@@ -41,6 +41,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.udistrital.asab_music_repository.controller.GuardarLetraActivity
 import com.udistrital.asab_music_repository.entity.Cancion
@@ -66,7 +67,7 @@ fun mainMenu(title: String, content: @Composable (PaddingValues) -> Unit) {
     var foundCancion by remember { mutableStateOf<Cancion?>(null) }
     val cancionService = CancionService(DataBaseHelper(context))
     val options = listOf(
-        "Guardar Letra", "Practicar Tambor", "Practicar maraca"
+        "Guardar Letra", "Practicar tambor", "Practicar maraca"
     )
     Scaffold(
         topBar = {
@@ -119,12 +120,17 @@ fun mainMenu(title: String, content: @Composable (PaddingValues) -> Unit) {
 
                 DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                     options.forEach { option ->
-                        DropdownMenuItem(text = { Text(text = option) }, onClick = {
+                        DropdownMenuItem(
+                            modifier = Modifier
+                                .padding(4.dp),
+
+
+                            text = { Text(text = option) }, onClick = {
                             if (option == "Practicar maraca") {
                                 var intent = Intent(context, PracticarMaracaActivity::class.java)
                                 ContextCompat.startActivity(context, intent, null)
                             }
-                            if (option == "Practicar Tambor") {
+                            if (option == "Practicar tambor") {
                                 var intent = Intent(context, PracticarTamborActivity::class.java)
                                 ContextCompat.startActivity(context, intent, null)
                             }
