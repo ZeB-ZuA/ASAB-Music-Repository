@@ -28,6 +28,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -35,7 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 
 
 class TamborActivity : AppCompatActivity() {
-    var mMediaPlayer: MediaPlayer? = null
+    var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,6 +44,13 @@ class TamborActivity : AppCompatActivity() {
            TopAppBar()
         }
     }
+
+    fun playTambor(){
+       mediaPlayer = MediaPlayer.create(this, R.raw.shortbass);
+        mediaPlayer?.start()
+    }
+
+
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -99,10 +107,13 @@ class TamborActivity : AppCompatActivity() {
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp
             )
-            Image(
-                painter = imgTambor,
-                contentDescription = null
-            )
+            Surface(onClick = { playTambor() }) {
+                Image(
+                    painter = imgTambor,
+                    contentDescription = null
+                )
+            }
+
         }
 
     }

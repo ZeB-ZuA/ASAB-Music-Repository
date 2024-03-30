@@ -1,6 +1,12 @@
 package com.udistrital.asab_music_repository
 
+import android.R
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.media.SoundPool
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,26 +26,37 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
+import kotlin.math.sqrt
 
-class MaracaActivity : AppCompatActivity() {
 
+class MaracaActivity : AppCompatActivity(), SensorEventListener {
+    private var sensorManager: SensorManager? = null
+    private var soundPool: SoundPool? = null
+    private var maracaSoundId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        soundPool = SoundPool.Builder().setMaxStreams(1).build()
+        maracaSoundId = soundPool!!.load(this, R.raw.shortbass, 1)
 
+
+        // Registrar el listener del sensor
+        sensorManager!!.registerListener(
+            this,
+            sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
         setContent {
             TopAppBar()
         }
@@ -108,6 +125,26 @@ class MaracaActivity : AppCompatActivity() {
             )
         }
 
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        val x = event!!.values[0]
+        val y = event.values[1]
+        val z = event.values[2]
+
+        // Calcular la intensidad del movimiento
+        val magnitude = sqrt((x * x + y * y + z * z).toDouble()).toFloat()
+
+
+        // Ajustar el volumen del sonido
+        soundPool?.setVolume(maracaSoundId, magnitude / 10.0f, magnitude / 10.0f,)
+
+        // Reproducir el sonido
+        soundPool?.play(maracaSoundId, 1.0f, 1.0f, 0, 0, 1.0f)
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        TODO("Not yet implemented")
     }
 
 
