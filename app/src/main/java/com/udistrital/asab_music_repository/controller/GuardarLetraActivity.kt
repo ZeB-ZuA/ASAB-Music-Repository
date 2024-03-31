@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -51,7 +52,7 @@ class GuardarLetraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            mainMenu("Guardar Cancion") { padding -> guardarLetraScreen(padding) }
+            mainMenu("Guardar canción") { padding -> guardarLetraScreen(padding) }
 
         }
     }
@@ -70,8 +71,10 @@ class GuardarLetraActivity : AppCompatActivity() {
                 .padding(16.dp), contentAlignment = Alignment.Center
         ) {
             Column(
-                modifier = Modifier.run { align(Alignment.Center).offset(y = (-200).dp) },
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.run { align(Alignment.Center).offset(y = (-80).dp) },
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+
             ) {
                 TextField(
                     value = nombre,

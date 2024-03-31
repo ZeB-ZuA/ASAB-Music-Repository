@@ -20,6 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.media.MediaPlayer
 import android.view.View
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -31,6 +36,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 
@@ -45,8 +51,13 @@ class TamborActivity : AppCompatActivity() {
         }
     }
 
-    fun playTambor(){
-       mediaPlayer = MediaPlayer.create(this, R.raw.shortbass);
+    fun playTambor1(){
+       mediaPlayer = MediaPlayer.create(this, R.raw.tribaldry);
+        mediaPlayer?.start()
+    }
+
+    fun playTambor2(){
+        mediaPlayer = MediaPlayer.create(this, R.raw.shortbass);
         mediaPlayer?.start()
     }
 
@@ -94,11 +105,10 @@ class TamborActivity : AppCompatActivity() {
     }
     @Composable
     fun tamborScreen(padding: PaddingValues) {
-        val imgTambor = painterResource(R.drawable.tambor)
+        val imgTambor = painterResource(R.drawable.tambortocar)
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -107,16 +117,10 @@ class TamborActivity : AppCompatActivity() {
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp
             )
-            Surface(onClick = { playTambor() }) {
-                Image(
-                    painter = imgTambor,
-                    contentDescription = null
-                )
+            Surface(onClick = { playTambor1() }) {
+                Image(painter = imgTambor,
+                    contentDescription = null)
             }
-
         }
-
     }
-
-
 }

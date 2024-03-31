@@ -54,8 +54,7 @@ class PracticarMaracaActivity : AppCompatActivity() {
                 fontSize = 30.sp
             )
             Text("Instrucciones:", fontWeight = FontWeight.Bold,)
-            Text("Mueve tu dispositivo con movimientos rápidos y firmes para obtener un sonido más fuerte.\n" +
-                    "Experimenta con diferentes movimientos para encontrar la forma más cómoda de usar la maraca virtual.\n" +
+            Text("Mueve tu dispositivo con movimientos rápidos y firmes para obtener un sonido más fuerte.\n"  +
                     "Ajusta la sensibilidad del movimiento a tu gusto.\n" +
                     "Disfruta de la experiencia de tocar una maraca virtual con diferentes intensidades de sonido.")
             Button(

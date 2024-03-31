@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +36,7 @@ class PracticarTamborActivity : AppCompatActivity() {
 
     @Composable
     fun practicarTamborScreen(padding: PaddingValues) {
+        val imgTambor = painterResource(R.drawable.tambor)
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -46,6 +49,7 @@ class PracticarTamborActivity : AppCompatActivity() {
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp
             )
+            Image(painter = imgTambor, contentDescription = "")
             Text("Instrucciones:", fontWeight = FontWeight.Bold,)
             Text("Toca el “Tambor” en la pantalla del dispositivo se debe activar el sonido")
             Button(
