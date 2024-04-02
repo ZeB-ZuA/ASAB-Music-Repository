@@ -75,10 +75,12 @@ class MaracaActivity : AppCompatActivity(), SensorEventListener {
             traslationX = x.toInt();
             traslationY = y.toInt();
 
-            sound.setVolume(maracaSoundId, magnitude / 10.0f, magnitude / 10.0f,)
-            sound.play(maracaSoundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
-
+            if(x.toInt() != 0){
+                sound.setVolume(maracaSoundId, magnitude / 10.0f, magnitude / 10.0f,)
+                sound.play(maracaSoundId, 1.0f, 1.0f, 0, 0, 1.0f)
+            } else {
+                sound.stop(maracaSoundId)
+            }
         }
     }
 
@@ -95,6 +97,7 @@ class MaracaActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onDestroy() {
         sensorManager.unregisterListener(this)
+        sound.release()
         super.onDestroy()
     }
 
@@ -172,4 +175,3 @@ class MaracaActivity : AppCompatActivity(), SensorEventListener {
 
 
 }
-
